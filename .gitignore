@@ -1,2 +1,4 @@
-.yml
-.log
+.DS_Store
+.idea
+*.yml
+*.log
