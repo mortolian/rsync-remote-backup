@@ -5,25 +5,31 @@ a linux or unix source path to a local path using rsync.
 
 ## Requirements
 
-You will require Python 3.7 to run this application. It has not been tested
-with any other versions.
+You will require Python 3.9.x to run this application. It has not been tested
+with other versions.
 
 #### Python
-* 3.7.x
+- 3.9.10
 
 #### Python YAML
-```bash
-pip install pyyaml
+```commandline
+pip3 install pyyaml
+```
+
+or
+
+```commandline
+pip3 install -r requirements.txt
 ```
 
 #### OS
-* Mac OSX
-* Ubuntu
-* Debian
-* FreeBSD
+- Mac OSX
+- Ubuntu
+- Debian
+- FreeBSD
 
 #### RSYNC
-* Rsync 2.6.9
+- Rsync 2.6.9
 
 ## Setup Remote Key
 
@@ -43,7 +49,7 @@ need one config file, use the detault naming and leave out the ```--config={conf
 You can specify a config through cmd line using ```--config={config}```
 
 ```bash
-$ ./rsync_backup.py --config=2tbconfig.yml
+$ python3 rsync_backup.py --config=2tbconfig.yml
 ```
 
 When you have setup the config for the backup process you can run the program. If you want to run a test
@@ -51,13 +57,13 @@ first to see if your config is error free, you can specify ```--dry-run```. This
 on disk.
 
 ```bash
-$ ./rsync_backup.py --dry-run
+$ python3 rsync_backup.py --dry-run
 ```
 
 You can the program options displayed in CLI by using: ```-h``` or ```--help```.
 
 ```bash
-$ ./rsync_backup.py --help
+$ python3 rsync_backup.py --help
 ```
 
 #### RSYNC Check
@@ -71,15 +77,15 @@ rsync:
 ```
 
 #### Basic RSYNC Options
-* --ignore-existing 
-* --archive 
-* --progress 
-* --recursive 
-* --delete 
-* --stats 
-* --human-readable 
-* --copy-links 
-* --ignore-errors
+- --ignore-existing 
+- --archive 
+- --progress 
+- --recursive 
+- --delete 
+- --stats 
+- --human-readable 
+- --copy-links 
+- --ignore-errors
 
 #### License
 GNU GPLv3
@@ -87,12 +93,12 @@ GNU GPLv3
 # Requirements
 #### REQUIREMENTS
 
-* The program should be able to backup files from a remote network location like a NAS to a local attached drive.
-* The program should use RSYNC to do the backup.
-* The program should only have to require one password entry for each remote backup LOCATION.
-* The program should be configurable using a config file.
-* Configuration should not be stored to GIT.
-* The program should write a log of the backup to file.
+- The program should be able to backup files from a remote network location like a NAS to a local attached drive.
+- The program should use RSYNC to do the backup.
+- The program should only have to require one password entry for each remote backup LOCATION.
+- The program should be configurable using a config file.
+- Configuration should not be stored to GIT.
+- The program should write a log of the backup to file.
 
 #### RSYNC EXAMPLE
 ```bash
@@ -100,5 +106,5 @@ rsync --progress --recursive --archive --delete --verbose --stats --human-readab
 ```
 
 #### INFORMATION
-* https://download.samba.org/pub/rsync/rsync.html
-* https://unix.stackexchange.com/questions/368210/how-to-rsync-multiple-source-folders
+- https://download.samba.org/pub/rsync/rsync.html
+- https://unix.stackexchange.com/questions/368210/how-to-rsync-multiple-source-folders
