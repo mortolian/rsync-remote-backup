@@ -3,6 +3,14 @@
 This is a very simple tool which facilitates the automated backup of
 a linux or unix source path to a local path using rsync.
 
+## Roadmap
+
+- Combine all configurations into one JSON file.
+- Upgrade the code to be compatible with Python3.
+- Create a Make file or something of the sort to handle simple execution.
+- Rework the wording and colours of the application
+- Choose between a password and SSH Public Key setup
+
 ## Requirements
 
 You will require Python 3.9.x to run this application. It has not been tested
