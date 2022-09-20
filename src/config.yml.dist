@@ -20,3 +20,33 @@ rsync:
   version: "2.6.9"
   options: "--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links"
   check: True
+
+
+
+
+
+  {'offsite_4tb':
+  {
+  'description': 'Remote Backup Job - 4TB - Backup All Files',
+  'remote':
+  {
+  'host': '192.168.1.200',
+  'user': 'admin',
+  'paths': ['/share/Media']
+  },
+  'local':
+  {
+  'path': ['/Volumes/4tb1/']
+  },
+  'rsync':
+  {'options': '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'}},
+
+  'offsite_2tb1':
+  {
+  'description': 'Remote Backup Job'
+  },
+  'offsite_2tb2':
+  {
+  'description': 'Remote Backup Job'
+  }
+  }

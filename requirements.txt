@@ -14,3 +14,4 @@ pytest-cov==3.0.0
 PyYAML==6.0
 -e git+ssh://git@github.com/mortolian/rsync-remote-backup.git@3d0a30b1ee4410ce6be4f5ae1a13c3263965ee41#egg=RSYNC_Backup_Automation
 tomli==2.0.1
+termcolor~=2.0.1

@@ -1,0 +1,22 @@
+offsite_4tb:
+  description: 'Remote Backup Job - 4TB - Backup All Files'
+  remote:
+    host: '192.168.1.200'
+    user: 'admin'
+  sync:
+    paths:
+      Media:
+        remote_path: '/share/Media/'
+        local_path: '/Volumes/4tb1/Media/'
+      Gideon:
+        remote_path: '/share/Gideon/'
+        local_path: '/Volumes/4tb1/Gideon/'
+  rsync:
+    options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
+
+
+#offsite_2tb1:
+#  description: 'Remote Backup Job - 2TB1'
+
+#offsite_2tb2:
+#  description: 'Remote Backup Job - 2TB2'
