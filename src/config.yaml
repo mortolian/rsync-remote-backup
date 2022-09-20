@@ -3,14 +3,11 @@ offsite_4tb:
   remote:
     host: '192.168.1.200'
     user: 'admin'
-  sync:
     paths:
-      Media:
-        remote_path: '/share/Media/'
-        local_path: '/Volumes/4tb1/Media/'
-      Gideon:
-        remote_path: '/share/Gideon/'
-        local_path: '/Volumes/4tb1/Gideon/'
+      - '/share/Media/'
+      - '/share/Gideon/'
+  local:
+    path: '/Volumes/4tb1'
   rsync:
     options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
 

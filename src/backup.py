@@ -20,19 +20,13 @@ DEFAULT_CONFIG = 'config.yaml'
 
 
 @dataclass
-class ConfigSyncPathsDataClass:
-    name: str
-    remote_path: str
-    local_path: str
-
-
-@dataclass
 class ConfigDataClass:
     job_name: str
     description: str
     remote_host: str
     remote_user: str
-    sync_paths: list[ConfigSyncPathsDataClass]
+    remote_paths: list
+    local_path: str
     rsync_options: str
 
 
@@ -57,6 +51,10 @@ class ConfigJobNotFoundException(Exception):
     pass
 
 
+class PathValidationException(Exception):
+    pass
+
+
 def readConfig(config_file_path: str) -> ConfigListDataClass:
     """
     check if there is a config argument set and use that file else
@@ -71,13 +69,8 @@ def readConfig(config_file_path: str) -> ConfigListDataClass:
                     description=configs[c]['description'],
                     remote_host=configs[c]['remote']['host'],
                     remote_user=configs[c]['remote']['user'],
-                    sync_paths=[ConfigSyncPathsDataClass(
-                        name=p,
-                        remote_path=configs[c]['sync']['paths'][p][
-                            'remote_path'],
-                        local_path=configs[c]['sync']['paths'][p][
-                            'local_path'],
-                    ) for p in configs[c]['sync']['paths']],
+                    remote_paths=configs[c]['remote']['paths'],
+                    local_path=configs[c]['local']['path'],
                     rsync_options=configs[c]['rsync']['options'],
                 ) for c in configs]
             )
@@ -103,9 +96,9 @@ def checkRemoteSocket(host: str, port: int = 22) -> bool:
     return True
 
 
-def pathCheck(path) -> bool:
+def pathExistsCheck(path) -> bool:
     """
-    Checks whether a path exists and is a folder path (dir).
+    Checks whether a path exists and is a folder.
     """
     if os.path.exists(path) and os.path.isdir(path):
         return True
@@ -135,7 +128,28 @@ def rsyncCheck(version: str) -> bool:
 
 def compileRsyncCommand(config: ConfigDataClass) -> str:
     """ This creates the rsync command and validates all the information. """
-    return ''
+    command = f'rsync ' \
+              f'{config.rsync_options} ' \
+              f'{config.remote_user}@{config.remote_host}:' \
+              f'{" ".join(config.remote_paths)} {config.local_path}'
+
+    print(command)
+
+    return command
+
+
+def validateRemotePath(path: str) -> None:
+    """ Remote paths should have a trailing slash. """
+    if not path.endswith('/'):
+        raise PathValidationException(f'{path} should have a trailing slash '
+                                      f'in the job config.')
+
+
+def validateLocalPath(path: str) -> None:
+    """ The local path should not have a trailing slash. """
+    if path.endswith('/'):
+        raise PathValidationException(f'{path} should not have '
+                                      f'a trailing slash in the job config.')
 
 
 def rsync():
@@ -196,14 +210,18 @@ def main():
             available_jobs = [a.job_name for a in config.jobs]
             cprint(f'These jobs are available in your config file: '
                    f'{available_jobs}', 'blue')
-            exit(60)
+            exit(0)
 
         if args.job:
-            # Check that the job exists in the config.
-            job_config = findJobConfig(args.job, config)
-
             # Check to see if the correct RSYNC is available.
             rsyncCheck(RSYNC_VERSION)
+
+            # Check if the job exists in the config and get the config object.
+            job_config = findJobConfig(args.job, config)
+
+            # Validate Remote and Local paths
+            validateLocalPath(job_config.local_path)
+            [validateRemotePath(p) for p in job_config.remote_paths]
 
             # Build RSYNC command from job config if it exists
             rsync_command = compileRsyncCommand(job_config)
