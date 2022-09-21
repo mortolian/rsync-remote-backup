@@ -7,7 +7,7 @@ offsite_4tb:
       - '/share/Media/'
       - '/share/Gideon/'
   local:
-    path: '/Volumes/4tb1'
+    path: '/Volumes/WD256'
   rsync:
     options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
 

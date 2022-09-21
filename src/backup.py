@@ -133,8 +133,6 @@ def compileRsyncCommand(config: ConfigDataClass) -> str:
               f'{config.remote_user}@{config.remote_host}:' \
               f'{" ".join(config.remote_paths)} {config.local_path}'
 
-    print(command)
-
     return command
 
 
@@ -213,22 +211,29 @@ def main():
             exit(0)
 
         if args.job:
+            # Capture start time
+            start_time = time.time()
+
             # Check to see if the correct RSYNC is available.
             rsyncCheck(RSYNC_VERSION)
 
             # Check if the job exists in the config and get the config object.
             job_config = findJobConfig(args.job, config)
 
-            # Validate Remote and Local paths
+            # Validate Local path.
             validateLocalPath(job_config.local_path)
+            pathExistsCheck(job_config.local_path)
+
+            # Validate remote paths.
             [validateRemotePath(p) for p in job_config.remote_paths]
 
-            # Build RSYNC command from job config if it exists
+            # Build RSYNC command from job config if it exists.
             rsync_command = compileRsyncCommand(job_config)
 
-            # Do RSYNC backup
-            start_time = time.time()
+            # Run RSYNC
+            rsync(rsync_command)
 
+            # Display completion time
             cprint(f'The job {args.job} took {(time.time() - start_time):.2f} '
                    f'seconds to complete.', 'yellow')
 
