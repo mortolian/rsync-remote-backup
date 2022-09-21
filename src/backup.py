@@ -91,14 +91,16 @@ def rsyncCheck(version: str) -> bool:
     return True
 
 
-def compileRsyncCommand(config: ConfigDataClass) -> str:
+def compileRsyncCommand(config: ConfigDataClass, dry_run: bool = False) -> str:
     """ This creates the rsync command and validates all the information. """
-    command = f'rsync ' \
-              f'{config.rsync_options} ' \
-              f'{config.remote_user}@{config.remote_host}:' \
-              f'\'{" ".join(config.remote_paths)}\' {config.local_path}'
+    # Check if dry run was specified
+    if dry_run:
+        config.rsync_options += ' --dry-run'
 
-    return command
+    return f'rsync ' \
+           f'{config.rsync_options} ' \
+           f'{config.remote_user}@{config.remote_host}:' \
+           f'\'{" ".join(config.remote_paths)}\' {config.local_path}'
 
 
 def validateRemotePath(path: str) -> None:
@@ -193,10 +195,6 @@ def main():
             # Check if the job exists in the config and get the config object.
             job_config = findJobConfig(args.job, config)
 
-            # Check if dry run was specified
-            if args.dry_run:
-                job_config.rsync_options += ' --dry-run'
-
             # Validate Local path.
             validateLocalPath(job_config.local_path)
             pathExistsCheck(job_config.local_path)
@@ -205,7 +203,7 @@ def main():
             [validateRemotePath(p) for p in job_config.remote_paths]
 
             # Build RSYNC command from job config if it exists.
-            rsync_command = compileRsyncCommand(job_config)
+            rsync_command = compileRsyncCommand(job_config, args.dry_run)
 
             # Run RSYNC
             rsync(rsync_command)

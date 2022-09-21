@@ -6,7 +6,7 @@ offsite_4tb1:
     paths:
       - '/share/Media'
   local:
-    path: '/Volumes/4tb1/'
+    path: '/Volumes/4tb1'
   rsync:
     options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
 
@@ -23,7 +23,7 @@ offsite_2tb1:
       - '/share/Storage'
       - '/share/Software'
   local:
-    path: '/Volumes/BackupVolume2TB1/'
+    path: '/Volumes/BackupVolume2TB1'
   rsync:
     options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
 
@@ -40,6 +40,6 @@ offsite_2tb2:
       - '/share/Storage'
       - '/share/Software'
   local:
-    path: '/Volumes/BackupVolume2TB2/'
+    path: '/Volumes/BackupVolume2TB2'
   rsync:
     options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
