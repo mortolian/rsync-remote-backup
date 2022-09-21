@@ -131,16 +131,16 @@ def compileRsyncCommand(config: ConfigDataClass) -> str:
     command = f'rsync ' \
               f'{config.rsync_options} ' \
               f'{config.remote_user}@{config.remote_host}:' \
-              f'\'{",".join(config.remote_paths)}\' {config.local_path}'
+              f'\'{" ".join(config.remote_paths)}\' {config.local_path}'
 
     return command
 
 
 def validateRemotePath(path: str) -> None:
     """ Remote paths should have a trailing slash. """
-    # if path.endswith('/'):
-    #     raise PathValidationException(f'{path} should have a trailing slash '
-    #                                   f'in the job config.')
+    if path.endswith('/'):
+        raise PathValidationException(f'{path} should have a trailing slash '
+                                      f'in the job config.')
 
 
 def validateLocalPath(path: str) -> None:
@@ -154,14 +154,14 @@ def rsync(command: str):
     """
     This will run the final RSYNC.
     """
-    colored('blue')
+    print('\u001b[34m.')
     response = subprocess.run(
         command,
-        capture_output=True,
+        stderr=subprocess.DEVNULL,
         shell=True,
         text=True
     )
-    colored('white')
+    print('\u001b[37m.')
     return response.returncode
 
 
@@ -227,6 +227,10 @@ def main():
 
             # Check if the job exists in the config and get the config object.
             job_config = findJobConfig(args.job, config)
+
+            # Check if dry run was specified
+            if args.dry_run:
+                job_config.rsync_options += ' --dry-run'
 
             # Validate Local path.
             validateLocalPath(job_config.local_path)

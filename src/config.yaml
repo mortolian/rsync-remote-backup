@@ -4,12 +4,12 @@ offsite_4tb:
     host: '192.168.1.200'
     user: 'admin'
     paths:
-      - '/share/Media/'
-      - '/share/Gideon/'
+      - '/share/Gideon'
+      - '/share/Media'
   local:
     path: '/Volumes/WD256'
   rsync:
-    options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links --dry-run'
+    options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
 
 
 #offsite_2tb1:
