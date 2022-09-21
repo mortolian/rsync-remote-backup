@@ -9,7 +9,7 @@ offsite_4tb:
   local:
     path: '/Volumes/WD256'
   rsync:
-    options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
+    options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links --dry-run'
 
 
 #offsite_2tb1:
