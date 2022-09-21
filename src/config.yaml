@@ -1,19 +1,45 @@
-offsite_4tb:
-  description: 'Remote Backup Job - 4TB - Backup All Files'
+offsite_4tb1:
+  description: 'Remote Backup Job 1 - 4TB - Backup all multimedia files'
+  remote:
+    host: '192.168.1.200'
+    user: 'admin'
+    paths:
+      - '/share/Media'
+  local:
+    path: '/Volumes/4tb1/'
+  rsync:
+    options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
+
+
+offsite_2tb1:
+  description: 'Remote Backup Job 1 - 2TB - Backup Essential File'
   remote:
     host: '192.168.1.200'
     user: 'admin'
     paths:
       - '/share/Gideon'
-      - '/share/Media'
+      - '/share/Marietha'
+      - '/share/Joshua'
+      - '/share/Storage'
+      - '/share/Software'
   local:
-    path: '/Volumes/WD256'
+    path: '/Volumes/BackupVolume2TB1/'
   rsync:
     options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'
 
 
-#offsite_2tb1:
-#  description: 'Remote Backup Job - 2TB1'
-
-#offsite_2tb2:
-#  description: 'Remote Backup Job - 2TB2'
+offsite_2tb2:
+  description: 'Remote Backup Job 2 - 2TB - Backup Essential File'
+  remote:
+    host: '192.168.1.200'
+    user: 'admin'
+    paths:
+      - '/share/Gideon'
+      - '/share/Marietha'
+      - '/share/Joshua'
+      - '/share/Storage'
+      - '/share/Software'
+  local:
+    path: '/Volumes/BackupVolume2TB2/'
+  rsync:
+    options: '--progress --recursive --archive --delete --verbose --stats --human-readable --copy-links'

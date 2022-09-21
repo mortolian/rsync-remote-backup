@@ -12,47 +12,12 @@ import socket
 import subprocess
 import time
 import yaml
-from termcolor import colored, cprint
-from dataclasses import dataclass
+from termcolor import cprint
+from data_classes import *
+from exceptions import *
 
 RSYNC_VERSION = '2.6.9'
 DEFAULT_CONFIG = 'config.yaml'
-
-
-@dataclass
-class ConfigDataClass:
-    job_name: str
-    description: str
-    remote_host: str
-    remote_user: str
-    remote_paths: list
-    local_path: str
-    rsync_options: str
-
-
-@dataclass
-class ConfigListDataClass:
-    jobs: list[ConfigDataClass]
-
-
-class RsyncNotFoundException(Exception):
-    pass
-
-
-class RemoveSocketNotFoundException(Exception):
-    pass
-
-
-class PathNotFoundException(Exception):
-    pass
-
-
-class ConfigJobNotFoundException(Exception):
-    pass
-
-
-class PathValidationException(Exception):
-    pass
 
 
 def readConfig(config_file_path: str) -> ConfigListDataClass:
