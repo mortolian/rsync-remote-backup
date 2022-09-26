@@ -1,0 +1,39 @@
+# This workflow will build a new release when new code
+# is introduced to the master branch.
+# All testing and linting will be run as well.
+
+name: Basic Workflow Automations For RSYNC Automation Script
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10.5
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10.5"
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+        python3 -m venv ./venv/
+        source venv/bin/activate
+    - name: Lint With flake8
+      run: |
+        flake8 app/
+    - name: Test With PyTest
+      run: |
+        pytest tests/
+
