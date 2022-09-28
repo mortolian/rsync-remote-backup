@@ -8,22 +8,26 @@
 VENV_NAME?=venv
 PYTHON=${VENV_NAME}/bin/python
 
-## —————————— General RSYNC Backup 🖖 ————————————————
+## ———————————————— General RSYNC Backup 🖖 ————————————————
 ## Activate Virtual Environment: . ./venv/bin/activate
 ## Deactivate Virtual Environment: deactivate
-## ———————————————————————————————————————————————————
+## —————————————————————————————————————————————————————————
 
 help: ## Outputs this help screen.
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
-setup: ## This will setup the project using PIP installing all requirements.
+build: ## Automatically downloads all build dependencies.
+	pip install --upgrade build
+
+setup: build ## This will setup the project using PIP installing all requirements.
+	python -m build
 	pip install -e .
 
-freeze-requirements: ## Freeze the project requirements to the requirements.txt file.
-	pip freeze > requirements.txt
+pip-compile: ## This compiles a new requirements.txt file using pip-tools (pip-compile).
+	pip-compile
 
-pip-install-requirements: ## Install the requirements. Make sure you are in the VENV.
-	pip install -r requirements.txt
+freeze: ## Gives an output of all the installed packages and there versions.
+	pip freeze
 
 venv-setup: ## Creates the VENV when the project is freshly checked out from source control.
 	python3 -m venv ${VENV_NAME}
@@ -34,9 +38,6 @@ venv-upgrade-pip: # This upgrades the version of PIP installed in the VENV.
 venv-update: ## Updates the VENV with a new Python version.
 	mv venv/ venv_old/
 	python3 -m venv venv/
-
-venv-install-requirements: ## This installs the requirements.txt file to venv
-	pip install -r requirements.txt
 
 test: ## Run UNIT and Functional Tests with PyTest.
 	pytest tests --cov -s
