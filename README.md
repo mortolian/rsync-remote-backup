@@ -1,3 +1,31 @@
+# Rsync Backup Automation
+
+This is a small abstraction on the RSYNC command found on Unix or Linux
+to automate some repetitive things you have to do when creating complex backups
+between two Unix or Linux systems with encryption.
+
+This method of backup is often referred to as a one way sync backup.
+
+There may be other tools out there that can do this better, but I needed
+something more basic and specific to my needs. It was also fun to create.
+
+**This script is ideally suited for the following situations:**
+- Backup of a remote NAS to local storage. Like off site backups.
+- Automation of sync backup from a remote system with Rsync and SSH access 
+to local storage.
+
+## Requirements
+
+- Python 3.10.x
+- Rsync version 2.6.9 protocol version 29
+
+## Getting Started
+
+
+
+
+
+---
 # Rsync Backup Tool
 
 This is a very simple tool which facilitates the automated backup of
@@ -17,7 +45,8 @@ You will require Python 3.9.x to run this application. It has not been tested
 with other versions.
 
 #### Python
-- 3.9.10
+- Python 3.9.10
+
 
 #### Python YAML
 ```commandline
