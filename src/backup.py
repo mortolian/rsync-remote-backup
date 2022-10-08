@@ -94,7 +94,9 @@ def rsyncCheck(version: str) -> bool:
 
 
 def compileRsyncCommand(config: ConfigDataClass, dry_run: bool = False) -> str:
-    """ This creates the rsync command and validates all the information. """
+    """
+    This creates the rsync command and validates all the information.
+    """
     # Check if dry run was specified
     if dry_run:
         config.rsync_options += ' --dry-run'
@@ -106,14 +108,18 @@ def compileRsyncCommand(config: ConfigDataClass, dry_run: bool = False) -> str:
 
 
 def validateRemotePath(path: str) -> None:
-    """ Remote paths should have a trailing slash. """
+    """
+    Remote paths should have a trailing slash.
+    """
     if path.endswith('/'):
         raise PathValidationException(f'{path} should have a trailing slash '
                                       f'in the job config.')
 
 
 def validateLocalPath(path: str) -> None:
-    """ The local path should not have a trailing slash. """
+    """
+    The local path should not have a trailing slash.
+    """
     if path.endswith('/'):
         raise PathValidationException(f'{path} should not have '
                                       f'a trailing slash in the job config.')
@@ -150,7 +156,9 @@ def findJobConfig(
 
 
 def parserSetup() -> argparse.Namespace:
-    """ Set up the argument parser for the application. """
+    """
+    Set up the argument parser for the application.
+    """
     parser = argparse.ArgumentParser('Backup Remote Files.')
     parser.add_argument('-j', '--job',
                         help='Specifies what config job to run.',
