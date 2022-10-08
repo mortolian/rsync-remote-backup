@@ -1,10 +1,10 @@
+# Reference Sites:
 # https://www.dinotools.de/en/2019/12/23/use-python-with-virtualenv-in-makefiles/
 # https://earthly.dev/blog/python-makefile/
 # https://ljvmiranda921.github.io/notebook/2021/05/12/how-to-manage-python-envs/
 
 # Misc
 .DEFAULT_GOAL = help
-
 VENV_NAME?=venv
 PYTHON=${VENV_NAME}/bin/python
 
