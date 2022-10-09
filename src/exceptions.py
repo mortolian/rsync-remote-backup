@@ -2,7 +2,7 @@ class RsyncNotFoundException(Exception):
     pass
 
 
-class RemoveSocketNotFoundException(Exception):
+class RemoteSocketNotFoundException(Exception):
     pass
 
 
