@@ -15,8 +15,8 @@ import yaml
 from termcolor import cprint
 from src.data_classes import ConfigDataClass, ConfigListDataClass
 from src.exceptions import (PathValidationException, PathNotFoundException,
-                        RemoteSocketNotFoundException,
-                        ConfigJobNotFoundException, RsyncNotFoundException)
+                            RemoteSocketNotFoundException,
+                            ConfigJobNotFoundException, RsyncNotFoundException)
 
 RSYNC_VERSION = '2.6.9'
 DEFAULT_CONFIG = 'config.yaml'
