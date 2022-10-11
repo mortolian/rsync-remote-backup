@@ -198,7 +198,3 @@ def test_find_job_config() -> None:
 
     with pytest.raises(backup.ConfigJobNotFoundException):
         backup.findJobConfig('job3', config)
-
-
-def test_parse_setup() -> None:
-    pass
