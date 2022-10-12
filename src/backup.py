@@ -13,10 +13,10 @@ import subprocess
 import time
 import yaml
 from termcolor import cprint
-from data_classes import ConfigDataClass, ConfigListDataClass
-from exceptions import (PathValidationException, PathNotFoundException,
-                        RemoveSocketNotFoundException,
-                        ConfigJobNotFoundException, RsyncNotFoundException)
+from src.data_classes import ConfigDataClass, ConfigListDataClass
+from src.exceptions import (PathValidationException, PathNotFoundException,
+                            RemoteSocketNotFoundException,
+                            ConfigJobNotFoundException, RsyncNotFoundException)
 
 RSYNC_VERSION = '2.6.9'
 DEFAULT_CONFIG = 'config.yaml'
@@ -56,7 +56,7 @@ def checkRemoteSocket(host: str, port: int = 22) -> bool:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     result = sock.connect_ex((host, port))
     if result != 0:
-        raise RemoveSocketNotFoundException(
+        raise RemoteSocketNotFoundException(
             f'Remote host {host} did not answer on '
             f'port {port}.')
 
