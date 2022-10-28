@@ -1,8 +1,7 @@
 import subprocess
 import pytest
 import socket
-from src import backup
-from src.data_classes import ConfigDataClass, ConfigListDataClass
+from backup import backup, ConfigListDataClass, ConfigDataClass
 
 BAD_CONFIG_FILE = """
 offsite_1::
@@ -86,7 +85,7 @@ def mock_config_bad_file(mocker):
 
 def test_read_config(mock_config_good_file) -> None:
     result = backup.readConfig(config_file_path='mock_file.yaml')
-    assert result == CONFIG_DATA_OBJECT
+    assert repr(result) == repr(CONFIG_DATA_OBJECT)
 
 
 def test_read_config_key_error(mock_config_bad_file) -> None:
