@@ -1,7 +1,5 @@
 # Rsync Backup Automation
 
-
-
 This is a small abstraction on the RSYNC command found on Unix or Linux
 to automate some repetitive things you have to do when creating complex backups
 between two Unix or Linux systems with encryption.
@@ -119,7 +117,7 @@ From the root of the project folder run the following to get the help
 printout of how to use the script.
 
 ```commandline
-python ./src/backup.py --help
+python ./backup/backup.py --help
 ```
 ```commandline
 usage: Backup Remote Files. [-h] [-j JOB] [-s] [-c CONFIG] [-d]
@@ -136,14 +134,14 @@ options:
 
 ### Run A Job
 
-When you are setup you can run the job with the following command.
+When you are set up you can run the job with the following command.
 
 ```commandline
-python ./src/backup.py -j offsite_1
+python ./backup/backup.py -j offsite_1
 ```
 or, if not inside VENV
 ```commandline
-python3 ./src/backup.py -j offsite_1
+python3 ./backup/backup.py -j offsite_1
 ```
 
 You can also simulate the job with a "dry run", to make sure everything
