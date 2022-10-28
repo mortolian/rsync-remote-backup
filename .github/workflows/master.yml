@@ -33,7 +33,7 @@ jobs:
         pip install -e .
     - name: Lint With flake8
       run: |
-        flake8 src/
+        flake8 backup/
     - name: Test With PyTest
       run: |
         pytest tests/
