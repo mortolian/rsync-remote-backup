@@ -1,7 +1,8 @@
 import subprocess
 import pytest
 import socket
-from backup import backup, ConfigListDataClass, ConfigDataClass
+from backup import backup
+from backup.data_classes import ConfigListDataClass, ConfigDataClass
 
 BAD_CONFIG_FILE = """
 offsite_1::
