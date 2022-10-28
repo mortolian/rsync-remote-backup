@@ -43,7 +43,7 @@ test: ## Run UNIT and Functional Tests with PyTest.
 	pytest tests --cov -s
 
 lint: ## Run a code style linter (flake8) over the app code.
-	flake8 src/
+	flake8 backup/
 
 clean:
 	find . -name '.coverage' -delete
