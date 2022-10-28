@@ -45,7 +45,7 @@ test: ## Run UNIT and Functional Tests with PyTest.
 lint: ## Run a code style linter (flake8) over the app code.
 	flake8 src/
 
-clean:
+clean: ## This will clean out old files.
 	find . -name '.coverage' -delete
 	find . -name '*.pyc' -delete
 	find . -name '*.pyo' -delete
