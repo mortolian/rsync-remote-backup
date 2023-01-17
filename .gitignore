@@ -3,3 +3,4 @@
 *.log
 venv
 config.yaml
+.coveragerc
