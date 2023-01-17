@@ -46,7 +46,7 @@ venv-update: ## Updates the VENV with a new Python version.
 	python3 -m venv venv/
 
 test: ## Run UNIT and Functional Tests with PyTest.
-	pytest tests --cov -s
+	python -m pytest tests/ -vv --cov -s
 
 lint: ## Run a code style linter (flake8) over the app code.
 	flake8 backup/

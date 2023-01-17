@@ -41,8 +41,21 @@ Home = "https://github.com/mortolian/rsync-remote-backup"
 [project.optional-dependencies]
 test = []
 
+[tool.setuptools.packages.find]
+where = ["backup", "tests"]  # list of folders that contain the packages (["."] by default)
+include = ["*"]  # package names should match these glob patterns (["*"] by default)
+exclude = []  # exclude packages matching these glob patterns (empty by default)
+namespaces = true  # to disable scanning PEP 420 namespaces (true by default)
+
 [project.scripts]
 my-script = "my_package.module:function"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests"
+]
 
 [tool.flake8]
 count = true
