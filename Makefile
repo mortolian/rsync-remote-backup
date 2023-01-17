@@ -27,6 +27,11 @@ pip-compile: ## This compiles a new requirements.txt file using pip-tools (pip-c
 	python -m piptools compile -o requirements.txt pyproject.toml
 	#pip-compile
 
+deps-update:
+	python -m pip install --upgrade pip-tools pip wheel
+	python -m piptools compile --upgrade --resolver=backtracking -o requirements.txt pyproject.toml
+	python -m pip check
+
 freeze: ## Gives an output of all the installed packages and there versions.
 	pip freeze
 
