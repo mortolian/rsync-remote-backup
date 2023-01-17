@@ -24,7 +24,8 @@ setup: build ## This will setup the project using PIP installing all requirement
 	pip install -e .
 
 pip-compile: ## This compiles a new requirements.txt file using pip-tools (pip-compile).
-	pip-compile
+	python -m piptools compile -o requirements.txt pyproject.toml
+	#pip-compile
 
 freeze: ## Gives an output of all the installed packages and there versions.
 	pip freeze

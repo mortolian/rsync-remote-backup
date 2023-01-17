@@ -1,3 +1,65 @@
+# https://hynek.me/til/pip-tools-and-pyproject-toml/\
+# https://setuptools.pypa.io/en/latest/userguide/declarative_config.html#declarative-config
+# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html#
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "backup"
+version = "2.2.0"
+authors = [
+    {name = "Mortolian", email = "hello@mortolio.com"},
+]
+maintainers = [
+    {name = "Mortolian", email = "hello@mortolio.com"},
+]
+description = "Small RSYNC backup automation tool for CLI."
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["rsync", "backup", "sync", "ssh"]
+license = {text = "BSD-3-Clause"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+
+dependencies = [
+    "flake8>=6.0.0",
+    "pip-tools>=6.12.1",
+    "termcolor>=2.2.0",
+    "pytest>=7.2.1",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "pyyaml>=6.0",
+    "build>=0.10.0",
+]
+
+[project.urls]
+Home = "https://github.com/mortolian/rsync-remote-backup"
+
+[project.optional-dependencies]
+test = []
+
+[project.scripts]
+my-script = "my_package.module:function"
+
+[tool.flake8]
+count = true
+max-line-length = 88
+ignore = [
+    # E501 line too long (80 > 79 characters)
+    "E501",
+    # I001 isort found an import in the wrong position
+    "I001",
+    # I003 isort expected 1 blank line in imports, found 0
+    "I003",
+    # I005 isort found an unexpected missing import
+    "I005",
+    # DUO102 insecure use of "random" module, prefer "random.SystemRandom"
+    "DUO102",
+    # Unecessary variable assignement before return statement.
+    "R504",
+    # isort found an unexpected blank line in imports
+    "I004",
+]
